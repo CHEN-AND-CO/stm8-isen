@@ -73,7 +73,7 @@ Int.108=0
 String.6.0=2019,3,5,10,9,23
 String.100.0=$(TargetFName)
 String.101.0=
-String.103.0=.\;
+String.103.0=.\;..\libs;
 
 [Root.Config.0.Settings.2]
 String.2.0=
@@ -82,7 +82,7 @@ String.100.0=STM8S105K4
 
 [Root.Config.0.Settings.3]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 -customDbg -customDebCompat -customOpt-no -customLst -l +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
+String.3.0=cxstm8 -i..\libs  -customDbg -customDebCompat -customOpt-no -customLst -l +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
 String.6.0=2019,3,5,10,9,23
@@ -152,7 +152,7 @@ Int.108=0
 String.6.0=2019,3,5,10,9,23
 String.100.0=$(TargetFName)
 String.101.0=
-String.103.0=.\;
+String.103.0=.\;..\libs;
 
 [Root.Config.1.Settings.2]
 String.2.0=
@@ -161,7 +161,7 @@ String.100.0=STM8S105K4
 
 [Root.Config.1.Settings.3]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
+String.3.0=cxstm8 -i..\libs  +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
 String.6.0=2019,3,5,10,9,23
@@ -214,7 +214,7 @@ String.6.0=2019,3,5,10,9,23
 [Root.Source Files]
 ElemType=Folder
 PathName=Source Files
-Child=Root.Source Files.fonc_div.c
+Child=Root.Source Files...\libs\fonc_div.c
 Next=Root.Include Files
 Config.0=Root.Source Files.Config.0
 Config.1=Root.Source Files.Config.1
@@ -239,7 +239,7 @@ Int.1=0
 
 [Root.Source Files.Config.0.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 -customDbg -customDebCompat -customOpt-no -customLst -l +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
+String.3.0=cxstm8 -i..\libs  -customDbg -customDebCompat -customOpt-no -customLst -l +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
 String.6.0=2019,3,5,10,9,23
@@ -266,7 +266,7 @@ Int.1=0
 
 [Root.Source Files.Config.1.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
+String.3.0=cxstm8 -i..\libs  +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
 String.6.0=2019,3,5,10,9,23
@@ -285,9 +285,24 @@ String.4.0=
 String.5.0=
 String.6.0=2019,3,5,10,9,23
 
-[Root.Source Files.fonc_div.c]
+[Root.Source Files...\libs\fonc_div.c]
 ElemType=File
-PathName=fonc_div.c
+PathName=..\libs\fonc_div.c
+Next=Root.Source Files.fonc_delay.c
+
+[Root.Source Files.fonc_delay.c]
+ElemType=File
+PathName=fonc_delay.c
+Next=Root.Source Files.fonc_i2c.c
+
+[Root.Source Files.fonc_i2c.c]
+ElemType=File
+PathName=fonc_i2c.c
+Next=Root.Source Files.fonc_tft.c
+
+[Root.Source Files.fonc_tft.c]
+ElemType=File
+PathName=fonc_tft.c
 Next=Root.Source Files.main.c
 
 [Root.Source Files.main.c]
@@ -302,7 +317,7 @@ PathName=stm8_interrupt_vector.c
 [Root.Include Files]
 ElemType=Folder
 PathName=Include Files
-Child=Root.Include Files.fonc_div.h
+Child=Root.Include Files...\libs\fonc_div.h
 Config.0=Root.Include Files.Config.0
 Config.1=Root.Include Files.Config.1
 
@@ -326,7 +341,7 @@ Int.1=0
 
 [Root.Include Files.Config.0.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 -customDbg -customDebCompat -customOpt-no -customLst -l +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
+String.3.0=cxstm8 -i..\libs  -customDbg -customDebCompat -customOpt-no -customLst -l +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
 String.6.0=2019,3,5,10,9,23
@@ -353,7 +368,7 @@ Int.1=0
 
 [Root.Include Files.Config.1.Settings.1]
 String.2.0=Compiling $(InputFile)...
-String.3.0=cxstm8 +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
+String.3.0=cxstm8 -i..\libs  +mods0 -customC-pp $(ToolsetIncOpts) -cl$(IntermPath) -co$(IntermPath) $(InputFile) 
 String.4.0=$(IntermPath)$(InputName).$(ObjectExt)
 String.5.0=$(IntermPath)$(InputName).ls
 String.6.0=2019,3,5,10,9,23
@@ -372,6 +387,31 @@ String.4.0=
 String.5.0=
 String.6.0=2019,3,5,10,9,23
 
-[Root.Include Files.fonc_div.h]
+[Root.Include Files...\libs\fonc_div.h]
 ElemType=File
-PathName=fonc_div.h
+PathName=..\libs\fonc_div.h
+Next=Root.Include Files.defs.h
+
+[Root.Include Files.defs.h]
+ElemType=File
+PathName=defs.h
+Next=Root.Include Files.fonc_delay.h
+
+[Root.Include Files.fonc_delay.h]
+ElemType=File
+PathName=fonc_delay.h
+Next=Root.Include Files.fonc_i2c.h
+
+[Root.Include Files.fonc_i2c.h]
+ElemType=File
+PathName=fonc_i2c.h
+Next=Root.Include Files.fonc_tft.h
+
+[Root.Include Files.fonc_tft.h]
+ElemType=File
+PathName=fonc_tft.h
+Next=Root.Include Files.iostm8s105.h
+
+[Root.Include Files.iostm8s105.h]
+ElemType=File
+PathName=iostm8s105.h

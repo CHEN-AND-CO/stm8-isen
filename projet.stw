@@ -30,7 +30,3 @@ Dependencies=
 [Project6]
 Filename=simu_f\simu_f.stp
 Dependencies=
-[Options]
-ActiveProject=simu_f
-ActiveConfig=Debug
-AddSortedElements=1
