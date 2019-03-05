@@ -1243,3 +1243,15 @@ WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPHLAAAAAA
 Title=ST Visual Develop - projet.stw
 
 [WorkState_v1_2.Frames.ChildFrames]
+ptn_Child1=Document-0
+
+[WorkState_v1_2.Frames.ChildFrames.Document-0]
+ptn_Child1=ViewFrame-0
+
+[WorkState_v1_2.Frames.ChildFrames.Document-0.ViewFrame-0]
+DocPathName=controle_2\main.c
+DocumentString=
+DocTemplateIndex=0
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPAAAAAAAAAAAAAAAAKHCAAAAAENAAAAAA
+IsActiveChildFrame=True
+IsFrameVisible=True

@@ -16,5 +16,17 @@ Filename=controle_3\controle_3.stp
 Dependencies=
 
 [Project3]
-Filename=final\final.stp
+Filename=controle_final\controle_final.stp
+Dependencies=
+
+[Project4]
+Filename=simu_1\simu_1.stp
+Dependencies=
+
+[Project5]
+Filename=simu_2\simu_2.stp
+Dependencies=
+
+[Project6]
+Filename=simu_f\simu_f.stp
 Dependencies=
