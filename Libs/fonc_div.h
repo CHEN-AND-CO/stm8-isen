@@ -1,5 +1,7 @@
 #include "iostm8s105.h"
+#include "fonc_tft.h"
 
+#define DISPLAY_CHAR_SIZE 12
 //prototype fonctions 
 //control_1
 

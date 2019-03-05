@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Noms binome  :                                                                                         
+* Noms binome  :   Kevin Le Torc'h Gwenole Leroy Ferrec                
 * Description    : fonctions diverses projet numérique année 3  
 *******************************************************************************/
 
@@ -22,9 +22,14 @@ void init_port_SPI(void){
 }
 
 void affiche_mot(uint8_t *mot, uint8_t col, uint8_t ligne){
+	int i;
+	for(i=0; mot[i]; ++i){
+		displayChar_TFT(col, ligne, mot[i]+DISPLAY_CHAR_SIZE*i, ST7735_WHITE, ST7735_BLACK, DISPLAY_CHAR_SIZE);
+	}
 }
 
 void affiche_temp(uint16_t nombre, uint8_t ligne, uint8_t col){
+	
 }
 
 void affiche_puis(uint8_t nombre, uint8_t ligne, uint8_t col){
