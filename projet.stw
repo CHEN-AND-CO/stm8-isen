@@ -4,9 +4,17 @@
 Keyword=ST7Workspace-V0.7
 
 [Project0]
-Filename=controle_2.stp
+Filename=controle_1\controle_1.stp
 Dependencies=
-[Options]
-ActiveProject=controle_2
-ActiveConfig=Debug
-AddSortedElements=1
+
+[Project1]
+Filename=controle_2\controle_2.stp
+Dependencies=
+
+[Project2]
+Filename=controle_3\controle_3.stp
+Dependencies=
+
+[Project3]
+Filename=final\final.stp
+Dependencies=
