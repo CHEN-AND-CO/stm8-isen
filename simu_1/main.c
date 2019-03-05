@@ -9,7 +9,7 @@
 volatile uint8_t f_fermee, PUIS;
 volatile uint8_t int_500ms_ok;
 uint16_t Cent_Text, Cent_Tint;
-// uint16_t old_Text, old_Tint;
+uint16_t old_Text, old_Tint;
 
 main()
 {
@@ -37,6 +37,9 @@ main()
 		if (int_500ms_ok) {
 			Cent_Text = read_ADC() * 4;
 			//calcul tint
+			if ( f_fermee ) {
+				Cent_Tint = old_Tint * coef_af + ((old_Text + coef_df * PUIS / 100) + (Cent_Text + coef_df))
+			}
 		}
 	}
 }
