@@ -36,15 +36,13 @@ void init_timer2_pwm(void);
 
 
 
-//control_3
-
-
+void init_port_UART(void);
 
 
 
 //control_f
 
-
+    
 void init_PE5(void);
 
 void init_ADC(void);
