@@ -36,7 +36,7 @@ void init_timer2_pwm(void);
 //control_2
 
 
-
+void init_port_UART(void);
 
 
 //control_3

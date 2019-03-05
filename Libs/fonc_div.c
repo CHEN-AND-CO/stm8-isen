@@ -69,3 +69,18 @@ void init_timer2_pwm(void){
 	TIM2_CCER1 &= 0b11111101;
 	TIM2_CR1 = 0x81;
 }
+
+void init_port_UART(void){
+	CLK_PCKENR1 |= (1<<3);
+	
+	uint16_t uartdiv = 208;
+	UART2_BRR1 = (uartdiv>>4);
+	UART2_BRR2 = ((uartdiv>>8)&0xF0)|(uartdiv&0x0F);
+	
+	UART_CR1 |= (0b00101010);
+	UART_CR2 &= (0b00001111);
+	UART_CR2 |= (0b00001100);
+	
+	UART_CR3 &= (0b1000111);
+	UART_CR3 |= (0b0001000);
+}
