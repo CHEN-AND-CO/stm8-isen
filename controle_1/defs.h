@@ -1,3 +1,5 @@
+#include "iostm8s105.h"
+
 //parametres de la maison//vv 
 #define coef_af 0.927007299  //  a fenetre fermée
 #define coef_ao 0.795918367 // a fenetre ouverte

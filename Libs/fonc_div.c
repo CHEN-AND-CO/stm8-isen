@@ -40,10 +40,27 @@ void affiche_temp(uint16_t nombre, uint8_t ligne, uint8_t col){
 }
 
 void affiche_puis(uint8_t nombre, uint8_t ligne, uint8_t col){
+	uint8_t i = 0;
+	do{
+		displayChar_TFT(col+DISPLAY_CHAR_SIZE*i++, ligne,'0'+(nombre%10), ST7735_WHITE, ST7735_BLACK, DISPLAY_CHAR_SIZE);
+		nombre /= 10;
+	}while(!nombre);
 }
 
 void affiche_etat_fen(unsigned char fermee){
+	displayChar_TFT(DISPLAY_FEN_X+96, DISPLAY_FEN_Y, (fermee == 'F' || fermee == 'O')?fermee:'?', ST7735_WHITE, ST7735_BLACK, DISPLAY_CHAR_SIZE);
 }
 
 void init_timer2_pwm(void){
+	CLK_PCKENR1 |= (1<<5);
+	
+	TIM2_PSCR = 0;
+	TIM2_ARRH = 0;
+	TIM2_ARRL = 253;
+	
+	TIM2_CCMR1 |= 0b01101000;
+	TIM2_CCMR1 &= 0b11101100;
+	TIM2_CCER1 |= 0b00000001;
+	TIM2_CCER1 &= 0b11111101;
+	TIM2_CR1 = 0x81;
 }

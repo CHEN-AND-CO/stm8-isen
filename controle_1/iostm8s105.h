@@ -1,3 +1,6 @@
+#ifndef IOSTM8S105_H
+#define IOSTM8S105_H
+
 /*	IO DEFINITIONS FOR STM8 S105 covers C, K and S families
  *	Copyright (c) 2010 by COSMIC Software
  */
@@ -314,3 +317,5 @@ volatile char DM_CR2        @0x7f97;	/* IC Debugging Control register 2 */
 volatile char DM_CSR1       @0x7f98;	/* IC Debugging Control/Status reg 1 */
 volatile char DM_CSR2       @0x7f99;	/* IC Debugging Control/Status reg 2 */
 volatile char DM_ENFCTR     @0x7f9a;	/* IC Debugging Function Enable Reg 2 */
+
+#endif // IOSTM8S105_H
