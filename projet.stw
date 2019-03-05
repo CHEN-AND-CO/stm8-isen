@@ -6,3 +6,7 @@ Keyword=ST7Workspace-V0.7
 [Project0]
 Filename=controle_2.stp
 Dependencies=
+[Options]
+ActiveProject=controle_2
+ActiveConfig=Debug
+AddSortedElements=1
