@@ -5,6 +5,9 @@
 
 #include "fonc_div.h"
 
+extern volatile uint8_t f_fermee;
+
+
 void init_port_SPI(void){
 	CLK_PCKENR1 |= (1 << 1);
 	
@@ -51,6 +54,21 @@ void affiche_etat_fen(unsigned char fermee){
 	displayChar_TFT(DISPLAY_FEN_X+96, DISPLAY_FEN_Y, (fermee == 'F' || fermee == 'O')?fermee:'?', ST7735_WHITE, ST7735_BLACK, DISPLAY_CHAR_SIZE);
 }
 
+void init_timer1_500ms(void) {
+	CLK_PCKENR1 |= (1<<7);
+	
+	TIM1_PSCRH = 0;
+	TIM1_PSCRL = 15;
+
+	TIM1_ARRH = 0;
+	TIM1_ARRL = 249;
+
+	TIM1_CR1 = 0;
+	TIM1_IER |= (1<<0);
+	TIM1_SR1 = 0;
+	TIM1_CR1 |= (1<<0);
+}
+
 void init_timer2_pwm(void){
 	CLK_PCKENR1 |= (1<<5);
 	
@@ -63,4 +81,41 @@ void init_timer2_pwm(void){
 	TIM2_CCER1 |= 0b00000001;
 	TIM2_CCER1 &= 0b11111101;
 	TIM2_CR1 = 0x81;
+}
+
+void init_ADC(void) {
+	CLK_PCKENR2 |= (1<<3);
+
+	PF_DDR &= ~(1<<4);
+	PF_CR1 &= ~(1<<4);
+	PF_CR2 &= ~(1<<4);
+
+	ADC_CSR = 0x0C;
+	ADC_CR1 = 0x01;
+}
+
+uint8_t read_ADC(void) {
+	uint16_t ctemp;
+	
+	ADC_CR1 |= 0x01;
+
+	while ( !(ADC_CSR & 0x80) );
+
+	ctemp = (ADC_DRH << 2) | (ADC_DRL & 0x03);
+	ADC_CSR &= ~0x80;
+
+	return ctemp;
+}
+
+void init_PE5(void) {
+	PE_DDR &= ~(1<<5);
+	PE_CR1 &= ~(1<<5);
+	PE_CR2 |= (1<<5);
+
+	EXTI_CR1 |= (1<<7);
+	EXTI_CR1 &= ~(1<<6);
+}
+
+void int_PE5(void) {
+	f_fermee = !f_fermee;
 }
