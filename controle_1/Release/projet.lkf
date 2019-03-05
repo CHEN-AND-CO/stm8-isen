@@ -71,7 +71,5 @@ Release\stm8_interrupt_vector.o
 #<BEGIN DEFINED_VARIABLES>
 +def __endzp=@.ubsct			# end of uninitialized zpage
 +def __memory=@.bss				# end of bss segment
-+def __startmem=@.bss
-+def __endmem=0x5ff
 +def __stack=0x7ff
 #<END DEFINED_VARIABLES>
