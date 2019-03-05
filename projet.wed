@@ -1240,7 +1240,7 @@ ptn_Child2=ChildFrames
 
 [WorkState_v1_2.Frames.MainFrame]
 WindowPlacement=MCAAAAAAAAAAAAAADAAAAAAAPPPPPPPPPPPPPPPPPDAAAAAAJCAAAAAAHLAAAAAAEHAAAAAAEGEAAAAADBDAAAAA
-Title=ST Visual Develop - projet.stw - [Z:\home\bevin\gulag\Libs\fonc_div.h]
+Title=ST Visual Develop - projet.stw - [fonc_div.c]
 
 [WorkState_v1_2.Frames.ChildFrames]
 ptn_Child1=Document-0
@@ -1301,8 +1301,8 @@ ptn_Child1=ViewFrame-0
 DocPathName=libs\fonc_div.c
 DocumentString=
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPMPPPPPPPJOPPPPPPEIAAAAAAEIAAAAAAINEAAAAAJPBAAAAA
-IsActiveChildFrame=False
+WindowPlacement=MCAAAAAAAAAAAAAADAAAAAAAPPPPPPPPPPPPPPPPMPPPPPPPJOPPPPPPEIAAAAAAEIAAAAAAINEAAAAAJPBAAAAA
+IsActiveChildFrame=True
 IsFrameVisible=True
 
 [WorkState_v1_2.Frames.ChildFrames.Document-5]
@@ -1312,6 +1312,6 @@ ptn_Child1=ViewFrame-0
 DocPathName=libs\fonc_div.h
 DocumentString=
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAADAAAAAAAPPPPPPPPPPPPPPPPMPPPPPPPJOPPPPPPKJAAAAAAKJAAAAAAOOEAAAAAPACAAAAA
-IsActiveChildFrame=True
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPMPPPPPPPJOPPPPPPKJAAAAAAKJAAAAAAOOEAAAAAPACAAAAA
+IsActiveChildFrame=False
 IsFrameVisible=True
