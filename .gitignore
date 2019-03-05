@@ -1,4 +1,6 @@
-projet.stw
-projet.wed
+*.stw
+*.wed
+*.dep
+*.stp
 */Debug
 */Release
