@@ -1,7 +1,7 @@
 #include "fonc_tft.h"
 #include "iostm8s105.h"
 
-#define DISPLAY_CHAR_SIZE 1
+#define DISPLAY_CHAR_SIZE 12
 
 #define DISPLAY_TITLE_X 12	
 #define DISPLAY_TITLE_Y 5
@@ -48,6 +48,6 @@ void init_timer2_pwm(void);
 void init_PE5(void);
 
 void init_ADC(void);
-uint8_t read_ADC(void);
+uint16_t read_ADC(void);
 
 void init_timer1_500ms(void);

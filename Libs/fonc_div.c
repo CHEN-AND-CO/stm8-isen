@@ -5,8 +5,6 @@
 
 #include "fonc_div.h"
 
-extern volatile uint8_t f_fermee;
-
 
 void init_port_SPI(void){
 	CLK_PCKENR1 |= (1 << 1);
@@ -99,7 +97,7 @@ void init_ADC(void) {
 	ADC_CR1 = 0x01;
 }
 
-uint8_t read_ADC(void) {
+uint16_t read_ADC(void) {
 	uint16_t ctemp;
 	
 	ADC_CR1 |= 0x01;
@@ -119,8 +117,4 @@ void init_PE5(void) {
 
 	EXTI_CR1 |= (1<<7);
 	EXTI_CR1 &= ~(1<<6);
-}
-
-void int_PE5(void) {
-	f_fermee = !f_fermee;
 }

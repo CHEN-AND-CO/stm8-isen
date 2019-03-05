@@ -2,12 +2,27 @@
  *	Copyright (c) 2007 STMicroelectronics
  */
 
+#include"fonc_div.h"
+
+
 typedef void @far (*interrupt_handler_t)(void);
+
+extern volatile uint8_t f_fermee;
+extern volatile uint8_t int_500ms_ok;
 
 struct interrupt_vector {
 	unsigned char interrupt_instruction;
 	interrupt_handler_t interrupt_handler;
 };
+
+@far @interrupt void int_PE5(void)
+{
+	f_fermee = !f_fermee;
+}
+
+@far @interrupt void int_timer1_500ms(void) {
+	int_500ms_ok = 1;	
+}
 
 @far @interrupt void NonHandledInterrupt (void)
 {
