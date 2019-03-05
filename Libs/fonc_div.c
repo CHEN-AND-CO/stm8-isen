@@ -29,32 +29,31 @@ void init_port_SPI(void){
 
 void affiche_mot(uint8_t *mot, uint8_t col, uint8_t ligne){
 	uint8_t i;
-	for(i=0; mot[i]; ++i){
-		displayChar_TFT(col+DISPLAY_CHAR_SIZE*i, ligne, mot[i], ST7735_WHITE, ST7735_BLACK, DISPLAY_CHAR_SIZE);
+	for(i=0; mot[i]; i++){
+		displayChar_TFT(col+DISPLAY_CHAR_SIZE*i, ligne, mot[i], ST7735_WHITE, ST7735_BLACK, 2);
 	}
 }
 
 void affiche_temp(uint16_t nombre, uint8_t ligne, uint8_t col){
-	uint8_t i=0;
+	uint8_t i=5;
 	
 	do{
-		displayChar_TFT(col+DISPLAY_CHAR_SIZE*i++, ligne,'0'+(nombre%10), ST7735_WHITE, ST7735_BLACK, DISPLAY_CHAR_SIZE);
+		displayChar_TFT(col+DISPLAY_CHAR_SIZE*--i, ligne,'0'+(nombre%10), ST7735_WHITE, ST7735_BLACK, 2);
 		nombre /= 10;
 		
-		if(i==2) displayChar_TFT(col+DISPLAY_CHAR_SIZE*i++, ligne,'.', ST7735_WHITE, ST7735_BLACK, DISPLAY_CHAR_SIZE);
-	}while(!nombre && i<5);
+		if(i==3) displayChar_TFT(col+DISPLAY_CHAR_SIZE*--i, ligne,'.', ST7735_WHITE, ST7735_BLACK, 2);
+	}while(nombre && i>=0);
 }
 
 void affiche_puis(uint8_t nombre, uint8_t ligne, uint8_t col){
-	uint8_t i = 0;
-	do{
-		displayChar_TFT(col+DISPLAY_CHAR_SIZE*i++, ligne,'0'+(nombre%10), ST7735_WHITE, ST7735_BLACK, DISPLAY_CHAR_SIZE);
-		nombre /= 10;
-	}while(!nombre);
+	displayChar_TFT(col, ligne,'0'+(nombre/1000), ST7735_WHITE, ST7735_BLACK, 2);
+	displayChar_TFT(col+12, ligne,'0'+(nombre/100), ST7735_WHITE, ST7735_BLACK, 2);
+	displayChar_TFT(col+24, ligne,'0'+(nombre/10), ST7735_WHITE, ST7735_BLACK, 2);
+	displayChar_TFT(col+36, ligne,'0'+(nombre%10), ST7735_WHITE, ST7735_BLACK, 2);
 }
 
 void affiche_etat_fen(unsigned char fermee){
-	displayChar_TFT(DISPLAY_FEN_X+96, DISPLAY_FEN_Y, (fermee == 'F' || fermee == 'O')?fermee:'?', ST7735_WHITE, ST7735_BLACK, DISPLAY_CHAR_SIZE);
+	displayChar_TFT(DISPLAY_FEN_X+96, DISPLAY_FEN_Y, (fermee == 'F' || fermee == 'O')?fermee:'?', ST7735_WHITE, ST7735_BLACK, 2);
 }
 
 void init_timer2_pwm(void){

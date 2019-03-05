@@ -14,7 +14,7 @@ main()
 {
 	Cent_Text = 2045;
 	Cent_Tint = 3278;
-	f_fermee = 0;
+	f_fermee = 'O';
 	PUIS = 40;
 	
 	init_port_SPI();
