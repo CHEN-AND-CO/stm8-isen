@@ -3,7 +3,7 @@
 
 #define DISPLAY_CHAR_SIZE 1
 
-#define DISPLAY_TITLE_X 40		
+#define DISPLAY_TITLE_X 12	
 #define DISPLAY_TITLE_Y 5
 #define DISPLAY_FEN_X 1
 #define DISPLAY_FEN_Y 40
