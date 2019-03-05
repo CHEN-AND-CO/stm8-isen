@@ -17,8 +17,8 @@ void init_port_SPI(void){
 	PC_CR1 |= 0x80;
 	PC_CR2 &= 0x40;
 	
-	EXT1_CR1 &= 0xFE;
-	EXT2_CR2 |= 0x02;
+	EXTI_CR1 &= 0xFE;
+	EXTI_CR2 |= 0x02;
 }
 
 void affiche_mot(uint8_t *mot, uint8_t col, uint8_t ligne){
