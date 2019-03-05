@@ -4,3 +4,6 @@
 *.stp
 */Debug
 */Release
+.vscode
+.vscode/*
+

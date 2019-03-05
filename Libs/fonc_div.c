@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Noms binome  :   Kevin Le Torc'h Gwenole Leroy Ferrec                
+* Noms binome  :   Kevin Le Torc'h Gwenolé Leroy Ferrec                
 * Description    : fonctions diverses projet numérique année 3  
 *******************************************************************************/
 
