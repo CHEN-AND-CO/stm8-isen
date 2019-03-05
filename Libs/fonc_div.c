@@ -13,7 +13,9 @@ void init_port_SPI(void){
 	
 	SPI_CR1 |= (1 << 6); // Activate SPI port
 	
-	PC_DDR |= 0;
+	PC_DDR |= 0x80;
+	PC_CR1 |= 0x80;
+	PC_CR2 |
 }
 
 void affiche_mot(uint8_t *mot, uint8_t col, uint8_t ligne){
