@@ -5,12 +5,17 @@
 #include "defs.h"
 #include "fonc_div.h"
 
+volatile uint8_t f_fermee;
+volatile uint16_t Cent_Text;
+volatile uint16_t Cent_Tint;
+volatile uint8_t PUIS;
+
 main()
 {
-	uint16_t Cent_Text = 2045;
-	uint16_t Cent_Tint = 3278;
-	uint8_t f_fermee = 0;
-	uint8_t PUIS = 40;
+	Cent_Text = 2045;
+	Cent_Tint = 3278;
+	f_fermee = 0;
+	PUIS = 40;
 	
 	init_port_SPI();
 	init_TFT();

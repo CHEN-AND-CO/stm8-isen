@@ -8,14 +8,20 @@
 void init_port_SPI(void){
 	CLK_PCKENR1 |= (1 << 1);
 	
-	SPI_CR1 |= 0x2F;
+	SPI_CR1 |= 0x14;
 	SPI_CR2 |= 0x03;
 	
 	SPI_CR1 |= (1 << 6); // Activate SPI port
 	
 	PC_DDR |= 0x80;
 	PC_CR1 |= 0x80;
-	PC_CR2 &= 0x40;
+	PC_CR2 &= 0x7F;
+	PC_ODR |= 0x80;
+	
+	PD_DDR |= 0x81;
+	PD_CR1 |= 0x81;
+	PD_CR2 &= ~0x81;
+	PD_ODR &= ~0x81;
 	
 	EXTI_CR1 &= 0xFE;
 	EXTI_CR2 |= 0x02;
