@@ -2,6 +2,10 @@
  *	Copyright (c) 2007 STMicroelectronics
  */
 
+#include "iostm8s105.h"
+
+extern volatile unsigned char int_2s_ok;
+
 typedef void @far (*interrupt_handler_t)(void);
 
 struct interrupt_vector {
@@ -17,9 +21,10 @@ struct interrupt_vector {
 	return;
 }
 
-@far @interrupt void int_timer_2s(void){
-	write_UART2((0<<4)|((Cent_Text>>8)&0x0F);
-	write_UART2((1<<4)|((Cent_Text>>4)&0x0F);
+@far @interrupt void int_timer1_2s(void){
+	int_2s_ok = 1;
+	
+	TIM1_SR1 &= ~1;
 }
 
 extern void _stext();     /* startup routine */
@@ -38,9 +43,9 @@ struct interrupt_vector const _vectab[] = {
 	{0x82, NonHandledInterrupt}, /* irq8  */
 	{0x82, NonHandledInterrupt}, /* irq9  */
 	{0x82, NonHandledInterrupt}, /* irq10 */
-	{0x82, NonHandledInterrupt}, /* irq11 */
+	{0x82, int_timer1_2s}, /* irq11 */
 	{0x82, NonHandledInterrupt}, /* irq12 */
-	{0x82, int_timer_2s}, /* irq13 */
+	{0x82, NonHandledInterrupt}, /* irq13 */
 	{0x82, NonHandledInterrupt}, /* irq14 */
 	{0x82, NonHandledInterrupt}, /* irq15 */
 	{0x82, NonHandledInterrupt}, /* irq16 */
