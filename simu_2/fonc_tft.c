@@ -652,7 +652,7 @@ void init_TFT( void)
 	writedata(0xC0);
    
 	// all display background is black
-	fillRect_TFT(0, 0,  ST7735_TFTWIDTH, ST7735_TFTHEIGHT_18, ST7735_BLACK);
+		fillRect_TFT(0, 0,  ST7735_TFTWIDTH, ST7735_TFTHEIGHT_18, ST7735_BLACK);
 	
 	// display LOGO
 	//displayLogo_TFT();

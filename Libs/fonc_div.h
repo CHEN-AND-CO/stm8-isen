@@ -49,9 +49,12 @@ uint8_t etat_fen(uint16_t temp_ext, uint16_t temp_int, uint8_t puissance);
 
 //control_f
 
+
 void init_PE5(void);
+void init_PD4(void);
 
 void init_ADC(void);
 uint16_t read_ADC(void);
 
 void init_timer1_500ms(void);
+void init_timer3(void);
