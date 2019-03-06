@@ -42,7 +42,7 @@ void affiche_temp(uint16_t nombre, uint8_t ligne, uint8_t col){
 		nombre /= 10;
 		
 		if(i==3) displayChar_TFT(col+DISPLAY_CHAR_SIZE*--i, ligne,'.', ST7735_YELLOW, ST7735_BLACK, 2);
-	}while(nombre && i>=0);
+	}while(nombre || i>0);
 }
 
 void affiche_puis(uint8_t nombre, uint8_t ligne, uint8_t col){
@@ -70,7 +70,7 @@ void init_timer2_pwm(void){
 	TIM2_CR1 = 0x81;
 }
 
-void init_port_UART(void){
+void init_port_UART2(void){
 	uint16_t uartdiv = 208;
 	
 	CLK_PCKENR1 |= (1<<3);
@@ -85,3 +85,8 @@ void init_port_UART(void){
 	UART2_CR3 &= (0b1000111);
 	UART2_CR3 |= (0b0001000);
 }
+
+void write_UART2(uint8_t data){
+	UART2_DR = data;
+	while(!(UART2_SR&(1<<7)));
+}	

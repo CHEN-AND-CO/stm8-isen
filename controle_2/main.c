@@ -20,6 +20,7 @@ main()
 	init_port_SPI();
 	init_TFT();
 	init_timer2_pwm();
+	init_port_UART2();
 	
 	_asm("rim");
 

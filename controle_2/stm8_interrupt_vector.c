@@ -18,7 +18,8 @@ struct interrupt_vector {
 }
 
 @far @interrupt void int_timer_2s(void){
-	//Envoi
+	write_UART2((0<<4)|((Cent_Text>>8)&0x0F);
+	write_UART2((1<<4)|((Cent_Text>>4)&0x0F);
 }
 
 extern void _stext();     /* startup routine */
