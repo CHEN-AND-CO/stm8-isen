@@ -119,12 +119,17 @@ void init_PE5(void) {
 	EXTI_CR1 &= ~(1<<6);
 }
 
-void init_port_UART(void) {
-	uint16_t uartdiv;
+// void init_port_UART(void) {
+// 	uint16_t uartdiv;
 
+// 	CLK_PCKENR1 |= (1<<3);
+	
+// 	uartdiv = 208;
+void init_port_UART2(void){
+	uint16_t uartdiv = 208;
+	
 	CLK_PCKENR1 |= (1<<3);
 	
-	uartdiv = 208;
 	UART2_BRR1 = (uartdiv>>4);
 	UART2_BRR2 = ((uartdiv>>8)&0xF0)|(uartdiv&0x0F);
 	
@@ -135,3 +140,8 @@ void init_port_UART(void) {
 	UART2_CR3 &= (0b1000111);
 	UART2_CR3 |= (0b0001000);
 }
+
+void write_UART2(uint8_t data){
+	UART2_DR = data;
+	while(!(UART2_SR&(1<<7)));
+}	

@@ -36,8 +36,9 @@ void init_timer2_pwm(void);
 
 
 
-void init_port_UART(void);
+void init_port_UART2(void);
 
+void write_UART2(uint8_t data);
 
 
 //control_f
