@@ -18,7 +18,7 @@ main()
 	PUIS = 42;
 
 	//Fréquence fCPU à 16MHz
-	CLK_CKDIVR = 1;
+	CLK_CKDIVR = 0;
 	
 	init_port_SPI();
 	init_TFT();

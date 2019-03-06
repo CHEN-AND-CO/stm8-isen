@@ -9,8 +9,10 @@ typedef void @far (*interrupt_handler_t)(void);
 
 extern volatile uint8_t f_fermee;
 extern volatile uint8_t int_500ms_ok;
+extern volatile uint16_t pwm_sampler_freq;
 
-struct interrupt_vector {
+	struct interrupt_vector
+{
 	unsigned char interrupt_instruction;
 	interrupt_handler_t interrupt_handler;
 };
@@ -18,6 +20,27 @@ struct interrupt_vector {
 @far @interrupt void int_PE5(void)
 {
 	f_fermee = !f_fermee;
+}
+
+@far @interrupt void int_PD4(void) {
+
+	if (PD_IDR & 0x10)	//Niveau haut --> front montant
+	{
+		// _asm("NOP");
+		TIM3_CNTRH = 0;
+		TIM3_CNTRL = 0;
+		
+		TIM3_CR1 |= (1 << 0);
+
+	} else {			//Niveau bas --> front descendant
+	
+		TIM3_CR1 &= ~(1<<0);
+
+		pwm_sampler_freq = (TIM3_CNTRH << 8) | TIM3_CNTRL;
+		
+		TIM3_CNTRH = 0;
+		TIM3_CNTRL = 0;
+	}
 }
 
 @far @interrupt void int_timer1_500ms(void) {
@@ -44,7 +67,7 @@ struct interrupt_vector const _vectab[] = {
 	{0x82, NonHandledInterrupt}, /* irq3  */
 	{0x82, NonHandledInterrupt}, /* irq4  */
 	{0x82, NonHandledInterrupt}, /* irq5  */
-	{0x82, NonHandledInterrupt}, /* irq6  */
+	{0x82, int_PD4}, /* irq6  */
 	{0x82, int_PE5}, /* irq7  */
 	{0x82, NonHandledInterrupt}, /* irq8  */
 	{0x82, NonHandledInterrupt}, /* irq9  */

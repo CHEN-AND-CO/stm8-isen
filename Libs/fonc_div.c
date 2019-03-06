@@ -119,6 +119,27 @@ void init_PE5(void) {
 	EXTI_CR1 &= ~(1<<6);
 }
 
+void init_PD4(void) {
+	PD_DDR &= ~(1<<4);
+	PD_CR1 |= (1<<4);
+	PD_CR2 |= (1<<4);
+
+	EXTI_CR1 |= 0xC0;
+}
+
+void init_timer3(void) {
+	CLK_PCKENR1 |= (1 << 6);
+
+	TIM3_PSCR = 0;
+	
+	TIM3_ARRH = 0xFF;
+	TIM3_ARRL = 0xFF;
+
+	TIM3_CR1 = 0;
+	// TIM3_IER &= ~(1 << 0);
+	// TIM3_SR1 = 0;
+	// TIM3_CR1 |= (1 << 0);
+}
 // void init_port_UART(void) {
 // 	uint16_t uartdiv;
 

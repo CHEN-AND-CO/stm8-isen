@@ -43,10 +43,12 @@ void write_UART2(uint8_t data);
 
 //control_f
 
-    
+
 void init_PE5(void);
+void init_PD4(void);
 
 void init_ADC(void);
 uint16_t read_ADC(void);
 
 void init_timer1_500ms(void);
+void init_timer3(void);
