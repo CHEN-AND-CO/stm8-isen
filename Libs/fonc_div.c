@@ -159,3 +159,33 @@ uint8_t read_UART2(void){
 	while(UART2_SR>>7);
 	return UART2_DR;
 }
+
+unsigned int read_AD7991(uint8_t mot_conf){
+	unsigned int result;
+	
+	Init_I2C_Master();
+	Start_I2C();
+	
+	Write_I2C(0b01010001);
+	Ack_I2C();
+	
+	Write_I2C(mot_conf);
+	NoAck_I2C();
+	
+	result = Read_I2C();
+	Stop_I2C();
+	
+	return result;
+}
+
+uint8_t etat_fen(uint16_t temp_ext, uint16_t temp_int, uint8_t puissance){
+	float d = (temp_int-temp_ext)/puissance;
+	
+	if(d==coef_do){
+		return 'O';
+	}else if(d==coef_df){
+		return 'F';
+	}else{
+		return '?';
+	}
+}

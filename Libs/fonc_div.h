@@ -1,4 +1,5 @@
 #include "fonc_tft.h"
+#include "fonc_i2c.h"
 #include "iostm8s105.h"
 
 #define DISPLAY_CHAR_SIZE 12
@@ -39,6 +40,12 @@ void init_port_UART2(uint16_t UART_BAUDRATE);
 void write_UART2(uint8_t data);
 
 uint8_t read_UART2(void);
+
+//control_3
+
+unsigned int read_AD7991(uint8_t mot_conf);
+
+uint8_t etat_fen(uint16_t temp_ext, uint16_t temp_int, uint8_t puissance);
 
 //control_f
 
