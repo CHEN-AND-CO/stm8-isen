@@ -36,7 +36,7 @@ extern volatile uint16_t pwm_sampler_freq;
 	
 		TIM3_CR1 &= ~(1<<0);
 
-		pwm_sampler_freq = (TIM3_CNTRH << 8) | TIM3_CNTRL;
+		pwm_sampler_freq = ((TIM3_CNTRH << 8) | TIM3_CNTRL) / 16 +1;
 		
 		TIM3_CNTRH = 0;
 		TIM3_CNTRL = 0;
