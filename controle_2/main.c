@@ -2,8 +2,8 @@
  * 
  * Copyright (c) 2002-2005 STMicroelectronics
  */
-#include "defs.h"
 #include "fonc_div.h"
+#include "defs.h"
 
 volatile uint8_t f_fermee;
 volatile uint16_t Cent_Text;
