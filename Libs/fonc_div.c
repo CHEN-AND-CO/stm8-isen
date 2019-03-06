@@ -43,7 +43,7 @@ void affiche_temp(uint16_t nombre, uint8_t ligne, uint8_t col){
 		nombre /= 10;
 		
 		if(i==3) displayChar_TFT(col+DISPLAY_CHAR_SIZE*--i, ligne,'.', ST7735_YELLOW, ST7735_BLACK, 2);
-	}while(nombre && i>=0);
+	}while(nombre || i>0);
 }
 
 void affiche_puis(uint8_t nombre, uint8_t ligne, uint8_t col){
