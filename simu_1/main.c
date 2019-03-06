@@ -50,6 +50,9 @@ main()
 			affiche_temp(Cent_Tint, DISPLAY_TINT_Y, DISPLAY_TINT_X + 60);
 			affiche_puis(PUIS, DISPLAY_PUIS_Y, DISPLAY_PUIS_X + 60);
 			affiche_etat_fen(f_fermee);
+
+			//Reset du timer
+			int_500ms_ok = 0;
 		}
 	}
 }
