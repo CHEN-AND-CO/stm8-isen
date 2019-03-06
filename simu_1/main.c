@@ -15,7 +15,10 @@ main()
 {
 	//Initialisation
 	f_fermee = 0;
-	PUIS = 40;
+	PUIS = 42;
+
+	//Fréquence fCPU à 16MHz
+	CLK_CKDIVR = 1;
 	
 	init_port_SPI();
 	init_TFT();
@@ -40,9 +43,9 @@ main()
 		
 		//calcul tint probablement faussé facteur 100
 		if ( f_fermee ) {
-			Cent_Tint = old_Tint * coef_af + ((old_Text + coef_df * PUIS / 100) + (Cent_Text + coef_df * PUIS / 100 )) * coef_bf;
+			Cent_Tint = old_Tint * coef_af + ((old_Text + coef_df * PUIS) + (Cent_Text + coef_df * PUIS )) * coef_bf;
 		} else {
-			Cent_Tint = old_Tint * coef_ao + ((old_Text + coef_do * PUIS / 100) + (Cent_Text + coef_do * PUIS / 100)) * coef_bo;
+			Cent_Tint = old_Tint * coef_ao + ((old_Text + coef_do * PUIS) + (Cent_Text + coef_do * PUIS)) * coef_bo;
 		}
 
 		old_Text = Cent_Text;

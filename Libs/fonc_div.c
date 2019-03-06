@@ -54,7 +54,7 @@ void affiche_puis(uint8_t nombre, uint8_t ligne, uint8_t col){
 }
 
 void affiche_etat_fen(unsigned char fermee){
-	displayChar_TFT(DISPLAY_FEN_X+96, DISPLAY_FEN_Y, (fermee == 'F' || fermee == 'O')?fermee:'?', ST7735_YELLOW, ST7735_BLACK, 2);
+	displayChar_TFT(DISPLAY_FEN_X+96, DISPLAY_FEN_Y, (fermee)? 'F' : 'O', ST7735_YELLOW, ST7735_BLACK, 2);
 }
 
 void init_timer1_500ms(void) {
