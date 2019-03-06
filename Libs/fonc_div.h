@@ -32,18 +32,16 @@ void init_timer2_pwm(void);
 
 //control_2
 
+void init_timer1_2s(void);
 
-
-
-
-void init_port_UART2(void);
+void init_port_UART2(uint16_t UART_BAUDRATE);
 
 void write_UART2(uint8_t data);
 
+uint8_t read_UART2(void);
 
 //control_f
 
-    
 void init_PE5(void);
 
 void init_ADC(void);

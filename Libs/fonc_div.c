@@ -47,10 +47,12 @@ void affiche_temp(uint16_t nombre, uint8_t ligne, uint8_t col){
 }
 
 void affiche_puis(uint8_t nombre, uint8_t ligne, uint8_t col){
-	displayChar_TFT(col, ligne,'0'+(nombre/1000), ST7735_YELLOW, ST7735_BLACK, 2);
-	displayChar_TFT(col+12, ligne,'0'+(nombre/100), ST7735_YELLOW, ST7735_BLACK, 2);
-	displayChar_TFT(col+24, ligne,'0'+(nombre/10), ST7735_YELLOW, ST7735_BLACK, 2);
-	displayChar_TFT(col+36, ligne,'0'+(nombre%10), ST7735_YELLOW, ST7735_BLACK, 2);
+	uint8_t i=5;
+	
+	do{
+		displayChar_TFT(col+DISPLAY_CHAR_SIZE*--i, ligne,'0'+(nombre%10), ST7735_YELLOW, ST7735_BLACK, 2);
+		nombre /= 10;
+	}while(nombre || i>0);
 }
 
 void affiche_etat_fen(unsigned char fermee){
@@ -119,29 +121,41 @@ void init_PE5(void) {
 	EXTI_CR1 &= ~(1<<6);
 }
 
-// void init_port_UART(void) {
-// 	uint16_t uartdiv;
-
-// 	CLK_PCKENR1 |= (1<<3);
+void init_timer1_2s(void){
+	CLK_PCKENR1 |= (1<<7);
 	
-// 	uartdiv = 208;
-void init_port_UART2(void){
-	uint16_t uartdiv = 208;
+	TIM1_PSCRH = 0x07;
+	TIM1_PSCRL = 0xCF;
+
+	TIM1_ARRH = 0x07;
+	TIM1_ARRL = 0xCF;
+
+	TIM1_CR1 = 0x00;
+	TIM1_IER |= 1;
+	TIM1_SR1 = 0;
+	TIM1_CR1 |= 1;
+}
+
+void init_port_UART2(uint16_t UART_BAUDRATE){
+	uint16_t uartdiv = 2000000/UART_BAUDRATE;
 	
 	CLK_PCKENR1 |= (1<<3);
 	
 	UART2_BRR1 = (uartdiv>>4);
 	UART2_BRR2 = ((uartdiv>>8)&0xF0)|(uartdiv&0x0F);
 	
-	UART2_CR1 |= (0b00101010);
-	UART2_CR2 &= (0b00001111);
+	UART2_CR1 = 0b00000000;
 	UART2_CR2 |= (0b00001100);
 	
-	UART2_CR3 &= (0b1000111);
-	UART2_CR3 |= (0b0001000);
+	UART2_CR3 &= (0b10000000);
 }
 
 void write_UART2(uint8_t data){
 	UART2_DR = data;
-	while(!(UART2_SR&(1<<7)));
+	while(!(UART2_SR>>7));
 }	
+
+uint8_t read_UART2(void){
+	while(UART2_SR>>7);
+	return UART2_DR;
+}
