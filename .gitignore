@@ -10,3 +10,8 @@
 projet.wdb
 simu_1/simu_1.pdb
 *.spy
+*.pdb
+*.xml
+controle_2/test
+controle_2/test.c
+*.zip
