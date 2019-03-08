@@ -46,6 +46,8 @@ main()
 			affiche_temp(Cent_Text, DISPLAY_TEXT_Y, DISPLAY_TEXT_X+60);
 			affiche_temp(Cent_Tint, DISPLAY_TINT_Y, DISPLAY_TINT_X+60);
 			affiche_puis(PUIS, DISPLAY_PUIS_Y, DISPLAY_PUIS_X+60);
+			
+			f_fermee = etat_fen(Cent_Text, Cent_Tint, PUIS);
 			affiche_etat_fen(f_fermee);
 			
 			tmp_sot = (Cent_Text>>2) + 991;
@@ -60,7 +62,6 @@ main()
 			
 			Cent_Tint = read_AD7991(0b00011000)&0x0FFF;
 			Cent_Text = read_AD7991(0b00101000)&0x0FFF;
-			f_fermee = etat_fen(Cent_Text, Cent_Tint, PUIS);
 			
 			int_2s_ok = 0;
 		}

@@ -55,7 +55,7 @@ void affiche_puis(uint8_t nombre, uint8_t ligne, uint8_t col){
 }
 
 void affiche_etat_fen(unsigned char fermee){
-	displayChar_TFT(DISPLAY_FEN_X+96, DISPLAY_FEN_Y, (fermee)? 'F' : 'O', ST7735_YELLOW, ST7735_BLACK, 2);
+	displayChar_TFT(DISPLAY_FEN_X+96, DISPLAY_FEN_Y, fermee, ST7735_YELLOW, ST7735_BLACK, 2);
 }
 
 void init_timer1_500ms(void) {
@@ -185,27 +185,32 @@ unsigned int read_AD7991(uint8_t mot_conf){
 	Start_I2C();
 	
 	Write_I2C(adresse_esclave);
-	Ack_I2C();
+	NoAck_I2C();
 	
 	Write_I2C(mot_conf);
+	Stop_I2C();
+	
+	Init_I2C_Master();
+	Start_I2C();
+	
+	Write_I2C(adresse_esclave|0x01);
 	Ack_I2C();
 	
 	result = (Read_I2C()<<8);
 	NoAck_I2C();
 	
 	result |= Read_I2C();
-	
 	Stop_I2C();
 	
 	return result;
 }
 
 uint8_t etat_fen(uint16_t temp_ext, uint16_t temp_int, uint8_t puissance){
-	float d = (temp_int-temp_ext)/puissance;
+	uint8_t d = (temp_int-temp_ext)/puissance;
 	
-	if(d==coef_do){
+	if(d < coef_do+8 && d < d > coef_df-8){
 		return 'O';
-	}else if(d==coef_df){
+	}else if(d > coef_df-8 && d < coef_df+8){
 		return 'F';
 	}else{
 		return '?';
