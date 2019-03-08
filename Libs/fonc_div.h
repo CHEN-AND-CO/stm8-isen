@@ -56,6 +56,14 @@ extern volatile uint16_t display_bg_color;
 extern volatile uint16_t display_values_color;
 extern volatile uint16_t display_text_color;
 
+void init_LED_PWM(void);
+
+void init_timer3_pwm(void);
+
+void init_Bouton_Menu_Couleur(void);
+
+void init_Bouton_Couleur_OK(void);
+
 //simu
 void init_PE5(void);
 void init_PD4(void);

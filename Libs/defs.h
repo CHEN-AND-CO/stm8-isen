@@ -27,4 +27,6 @@ static const uint8_t texte[]="Texte:";
 static const uint8_t fond[]="Fond:";
 static const uint8_t valeurs[]="Valeurs:";
 
+static const uint16_t colors[]={ST7735_BLACK, ST7735_BLUE, ST7735_RED, ST7735_GREEN, ST7735_CYAN, ST7735_MAGENTA, ST7735_YELLOW, ST7735_WHITE};
+
 #endif /* DEFS_H */

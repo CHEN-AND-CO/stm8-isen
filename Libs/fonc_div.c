@@ -51,7 +51,7 @@ void affiche_puis(uint8_t nombre, uint8_t ligne, uint8_t col){
 	do{
 		displayChar_TFT(col+DISPLAY_CHAR_SIZE*--i, ligne,'0'+(nombre%10), ST7735_YELLOW, ST7735_BLACK, 2);
 		nombre /= 10;
-	}while(nombre || i>0);
+	}while(nombre || i>2);
 }
 
 void affiche_etat_fen(unsigned char fermee){
@@ -181,7 +181,6 @@ uint8_t read_UART2(void){
 unsigned int read_AD7991(uint8_t mot_conf){
 	unsigned int result = 0;
 	
-	Init_I2C_Master();
 	Start_I2C();
 	
 	Write_I2C(adresse_esclave);
@@ -190,7 +189,6 @@ unsigned int read_AD7991(uint8_t mot_conf){
 	Write_I2C(mot_conf);
 	Stop_I2C();
 	
-	Init_I2C_Master();
 	Start_I2C();
 	
 	Write_I2C(adresse_esclave|0x01);
@@ -206,13 +204,53 @@ unsigned int read_AD7991(uint8_t mot_conf){
 }
 
 uint8_t etat_fen(uint16_t temp_ext, uint16_t temp_int, uint8_t puissance){
-	uint8_t d = (temp_int-temp_ext)/puissance;
+	uint8_t d = 0;
+	if(!puissance){
+		d = temp_int-temp_ext;
+	}else{
+		d = (temp_int-temp_ext)/puissance;
+	}
 	
-	if(d < coef_do+8 && d < d > coef_df-8){
+	if(d < coef_do+8){
 		return 'O';
 	}else if(d > coef_df-8 && d < coef_df+8){
 		return 'F';
 	}else{
 		return '?';
 	}
+}
+
+void init_LED_PWM(void){
+	PB_DDR |= 1;
+	PB_CR1 |= 1;
+	PB_CR2 |= 1;
+	
+	//PB_ODR |= 1;
+}
+
+void init_timer3_pwm(void){
+	CLK_PCKENR1 |= (1<<5);
+	
+	TIM3_PSCR = 25;
+	TIM3_ARRH = 0;
+	TIM3_ARRL = 100;
+	
+	TIM3_CCMR1 |= 0b01101000;
+	TIM3_CCMR1 &= 0b11101100;
+	TIM3_CCER1 |= 0b00000001;
+	TIM3_CCER1 &= 0b11111101;
+	TIM3_CR1 = 0x81;
+	TIM3_IER |= 0x03;
+}
+
+void init_Bouton_Menu_Couleur(void){
+		PE_DDR &= ~(1<<5);
+		PE_CR1 &= ~(1<<5);
+		PE_CR2 |= (1<<5);
+}
+
+void init_Bouton_Couleur_OK(void){
+		PD_DDR &= ~(1<<3);
+		PD_CR1 &= ~(1<<3);
+		PD_CR2 |= (1<<3);
 }

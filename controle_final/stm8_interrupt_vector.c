@@ -5,6 +5,8 @@
 #include "iostm8s105.h"
 
 extern volatile unsigned char int_2s_ok;
+extern volatile uint8_t PUIS;
+extern volatile uint8_t menu_sel, sous_menu_sel;
 
 typedef void @far (*interrupt_handler_t)(void);
 
@@ -28,11 +30,28 @@ struct interrupt_vector {
 }
 
 @far @interrupt void pwm_update(void){
-	
+	if(PUIS!=127)PB_ODR &= ~1;
+
+	TIM3_SR1 &= 0b11111101;
 }
 
 @far @interrupt void pwm_reset(void){
+	PB_ODR |= 1;
+	
+	TIM3_SR1 &= ~1;
+}
 
+@far @interrupt void int_bouton_menu(void){
+	menu_sel++;
+	sous_menu_sel = 0;
+	
+	menu_sel%=4;
+}
+
+@far @interrupt void int_bouton_ok(void){	
+	sous_menu_sel++;
+	
+	sous_menu_sel%=8;
 }
 
 extern void _stext();     /* startup routine */
@@ -46,17 +65,17 @@ struct interrupt_vector const _vectab[] = {
 	{0x82, NonHandledInterrupt}, /* irq3  */
 	{0x82, NonHandledInterrupt}, /* irq4  */
 	{0x82, NonHandledInterrupt}, /* irq5  */
-	{0x82, NonHandledInterrupt}, /* irq6  */
-	{0x82, NonHandledInterrupt}, /* irq7  */
+	{0x82, int_bouton_ok}, /* irq6  */ //D
+	{0x82, int_bouton_menu}, /* irq7  */ //E
 	{0x82, NonHandledInterrupt}, /* irq8  */
 	{0x82, NonHandledInterrupt}, /* irq9  */
 	{0x82, NonHandledInterrupt}, /* irq10 */
 	{0x82, int_timer1_2s}, /* irq11 */
 	{0x82, NonHandledInterrupt}, /* irq12 */
-	{0x82, NonHandledInterrupt}, /* irq13 */
-	{0x82, NonHandledInterrupt}, /* irq14 */
-	{0x82, NonHandledInterrupt}, /* irq15 */
-	{0x82, NonHandledInterrupt}, /* irq16 */
+	{0x82, NonHandledInterrupt}, /* irq13 */ //Update/overflow
+	{0x82, NonHandledInterrupt}, /* irq14 */ //Capture/comp
+	{0x82, pwm_reset}, /* irq15 */
+	{0x82, pwm_update}, /* irq16 */
 	{0x82, NonHandledInterrupt}, /* irq17 */
 	{0x82, NonHandledInterrupt}, /* irq18 */
 	{0x82, NonHandledInterrupt}, /* irq19 */
