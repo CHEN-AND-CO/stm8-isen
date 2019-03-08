@@ -15,16 +15,16 @@
 
 // ecran principal, carte controle, carte simulateur
 
-const uint8_t control[]="CONTROLE";
-const uint8_t simu[]="SIMU";
-const uint8_t text[]="Text:"; 
-const uint8_t tint[]="Tint:"; 
-const uint8_t puis[]="PUIS:"; 
-const uint8_t fenetre[]="Fenetre:"; 
+static const uint8_t control[]="CONTROLE";
+static const uint8_t simu[]="SIMU";
+static const uint8_t text[]="Text:"; 
+static const uint8_t tint[]="Tint:"; 
+static const uint8_t puis[]="PUIS:"; 
+static const uint8_t fenetre[]="Fenetre:"; 
 
 // ecran choix couleur, carte controle
-const uint8_t texte[]="Texte:";
-const uint8_t fond[]="Fond:";
-const uint8_t valeurs[]="Valeurs:";
+static const uint8_t texte[]="Texte:";
+static const uint8_t fond[]="Fond:";
+static const uint8_t valeurs[]="Valeurs:";
 
 #endif /* DEFS_H */

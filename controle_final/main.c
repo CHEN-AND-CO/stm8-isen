@@ -2,8 +2,12 @@
  * 
  * Copyright (c) 2002-2005 STMicroelectronics
  */
+
 #include "fonc_div.h"
-#include "defs.h"
+
+extern volatile uint16_t display_bg_color;
+extern volatile uint16_t display_values_color;
+extern volatile uint16_t display_text_color;
 
 volatile uint8_t f_fermee;
 volatile uint16_t Cent_Text;
@@ -11,9 +15,10 @@ volatile uint16_t Cent_Tint;
 volatile uint8_t PUIS;
 volatile unsigned char int_2s_ok;
 
-main()
-{
+main(){
 	uint16_t tmp_sot = 0;
+	
+	display_bg_color = ST7735_BLACK;
 	
 	Cent_Text = 2045;
 	Cent_Tint = 3278;

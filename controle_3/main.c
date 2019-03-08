@@ -11,6 +11,10 @@ volatile uint16_t Cent_Tint;
 volatile uint8_t PUIS;
 volatile unsigned char int_2s_ok;
 
+volatile uint16_t display_bg_color;
+volatile uint16_t display_values_color;
+volatile uint16_t display_text_color;
+
 main()
 {
 	uint16_t tmp_sot = 0;
@@ -53,6 +57,10 @@ main()
 			write_UART2(((tmp_sot>>8)&0x0F)|0x80);
 			write_UART2(((tmp_sot>>4)&0x0F)|0x90);
 			write_UART2(((tmp_sot)&0x0F)|0xA0);
+			
+			Cent_Tint = read_AD7991(0b00011000)&0x0FFF;
+			Cent_Text = read_AD7991(0b00101000)&0x0FFF;
+			f_fermee = etat_fen(Cent_Text, Cent_Tint, PUIS);
 			
 			int_2s_ok = 0;
 		}

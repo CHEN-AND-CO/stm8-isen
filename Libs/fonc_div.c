@@ -5,7 +5,6 @@
 
 #include "fonc_div.h"
 
-
 void init_port_SPI(void){
 	CLK_PCKENR1 |= (1 << 1);
 	
@@ -138,14 +137,8 @@ void init_timer3(void) {
 	TIM3_ARRL = 0xFF;
 
 	TIM3_CR1 = 0;
-	// TIM3_IER &= ~(1 << 0);
-	// TIM3_SR1 = 0;
-	// TIM3_CR1 |= (1 << 0);
 }
-// void init_port_UART(void) {
-// 	uint16_t uartdiv;
 
-// 	CLK_PCKENR1 |= (1<<3);
 void init_timer1_2s(void){
 	CLK_PCKENR1 |= (1<<7);
 	
@@ -186,18 +179,22 @@ uint8_t read_UART2(void){
 }
 
 unsigned int read_AD7991(uint8_t mot_conf){
-	unsigned int result;
+	unsigned int result = 0;
 	
 	Init_I2C_Master();
 	Start_I2C();
 	
-	Write_I2C(0b01010001);
+	Write_I2C(adresse_esclave);
 	Ack_I2C();
 	
 	Write_I2C(mot_conf);
+	Ack_I2C();
+	
+	result = (Read_I2C()<<8);
 	NoAck_I2C();
 	
-	result = Read_I2C();
+	result |= Read_I2C();
+	
 	Stop_I2C();
 	
 	return result;

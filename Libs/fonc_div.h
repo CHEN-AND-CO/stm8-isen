@@ -1,6 +1,10 @@
+#ifndef FONC_DIV_H
+#define FONC_DIV_H
+
+#include "iostm8s105.h"
 #include "fonc_tft.h"
 #include "fonc_i2c.h"
-#include "iostm8s105.h"
+#include "defs.h"
 
 #define DISPLAY_CHAR_SIZE 12
 
@@ -48,8 +52,11 @@ unsigned int read_AD7991(uint8_t mot_conf);
 uint8_t etat_fen(uint16_t temp_ext, uint16_t temp_int, uint8_t puissance);
 
 //control_f
+extern volatile uint16_t display_bg_color;
+extern volatile uint16_t display_values_color;
+extern volatile uint16_t display_text_color;
 
-
+//simu
 void init_PE5(void);
 void init_PD4(void);
 
@@ -58,3 +65,5 @@ uint16_t read_ADC(void);
 
 void init_timer1_500ms(void);
 void init_timer3(void);
+
+#endif /* FONC_DIV_H */
