@@ -114,23 +114,28 @@ uint16_t read_ADC(void) {
 
 void init_I2C_Slave(void) {
 	//Enable I2C link
-	CLK_PCKENR1 |= 0b00000001;
+	CLK_PCKENR1 |= 0x01;
 
 	//Slave address (emulating the AD7991)
 	I2C_OARH = 0;
-	I2C_OARL = 0b00101000;
+	I2C_OARL = 0b01010000;
 
-	I2C_FREQR = 1;		//1MHz: Standard mode
-	I2C_CCRL = 0x0A;	//I2C clock control (from fonc_I2C.c)
-	I2C_CCRH = 0x00; 	//			"			"
-	I2C_TRISER = (I2C_TRISER & 0b11000000) | 0b00000011; // TRISE = 3 -> TRISE = 1us avec FMASTER = 2MHz (from fonc_I2C.c)
+	I2C_FREQR = (I2C_FREQR & 0xC0) | 0x02;		//1MHz: Standard mode
+	// I2C_CCRL = 0x0A;	//I2C clock control (from fonc_I2C.c)
+	// I2C_CCRH = 0x00; 	//			"			"
+	// I2C_TRISER = (I2C_TRISER & 0b11000000) | 0b00000011; // TRISE = 3 -> TRISE = 1us avec FMASTER = 2MHz (from fonc_I2C.c)
+	
+	//Interrupt configuration
+	I2C_ITR = (I2C_ITR & ~0x01) | 0x06;	//ITBUFEN enabled, ITEVTEN enabled, ITERTEN disabled
 	
 	//I2C configuration
 	I2C_CR1 = (I2C_CR1 & 0b00111110) | 1; //I2C_CR1-PE: Enable I2C, enable clock stretching (slave), disable broadcast
-	I2C_CR2 = 0x04; //Auto ACK
+	I2C_CR2 = (I2C_CR2 & 0b01110000) | 0x04; //Auto ACK
+}
 
-	//Interrupt configuration
-	(I2C_ITR &= ~0x01) |= 0x06;	//ITBUFEN enabled, ITEVTEN enabled, ITERTEN disabled
+uint8_t read_I2C_Slave(void) {
+	while ( !(I2C_SR1 & 0x02) );
+	return I2C_DR;
 }
 
 void init_PE5(void) {

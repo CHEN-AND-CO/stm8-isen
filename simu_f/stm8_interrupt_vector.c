@@ -2,7 +2,8 @@
  *	Copyright (c) 2007 STMicroelectronics
  */
 
-#include"fonc_div.h"
+#include "fonc_div.h"
+#include "fonc_I2C.h"
 
 
 typedef void @far (*interrupt_handler_t)(void);
@@ -57,6 +58,14 @@ extern volatile uint16_t pwm_sampler_freq;
 	}
 }
 
+@far @interrupt void int_I2C_Slave(void) {
+	uint8_t rdata;
+	
+	rdata = read_I2C_Slave();
+
+	//if ()
+}
+
 @far @interrupt void NonHandledInterrupt (void)
 {
 	/* in order to detect unexpected events during development, 
@@ -89,7 +98,7 @@ struct interrupt_vector const _vectab[] = {
 	{0x82, NonHandledInterrupt}, /* irq16 */
 	{0x82, NonHandledInterrupt}, /* irq17 */
 	{0x82, NonHandledInterrupt}, /* irq18 */
-	{0x82, NonHandledInterrupt}, /* irq19 */
+	{0x82, int_I2C_Slave}, /* irq19 */
 	{0x82, NonHandledInterrupt}, /* irq20 */
 	{0x82, NonHandledInterrupt}, /* irq21 */
 	{0x82, NonHandledInterrupt}, /* irq22 */

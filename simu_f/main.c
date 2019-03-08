@@ -2,7 +2,6 @@
  * 
  * Copyright (c) 2002-2005 STMicroelectronics
  */
-
 #include "fonc_div.h"
 #include "defs.h"
 
@@ -30,6 +29,7 @@ main()
 	init_ADC();
 	init_timer1_500ms();
 	init_timer3();
+	init_I2C_Slave();
 	
 	_asm("rim");
 
