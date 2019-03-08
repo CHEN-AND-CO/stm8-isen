@@ -112,6 +112,14 @@ uint16_t read_ADC(void) {
 	return ctemp;
 }
 
+void init_I2C(void) {
+	I2C_FREQR = 1; //1MHz: Standard mode
+
+	I2C_OARH = 0;
+	// I2C_OARL = 
+	
+}
+
 void init_PE5(void) {
 	PE_DDR &= ~(1<<5);
 	PE_CR1 &= ~(1<<5);
