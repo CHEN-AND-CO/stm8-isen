@@ -63,7 +63,7 @@ extern volatile uint16_t pwm_sampler_freq;
 	
 	rdata = read_I2C_Slave();
 
-	//if ()
+	//return if ();
 }
 
 @far @interrupt void NonHandledInterrupt (void)
