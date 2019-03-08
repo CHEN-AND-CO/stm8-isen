@@ -71,6 +71,9 @@ void init_PD4(void);
 void init_ADC(void);
 uint16_t read_ADC(void);
 
+void init_I2C_Slave(void);
+uint8_t read_I2C_Slave(void);
+
 void init_timer1_500ms(void);
 void init_timer3(void);
 
